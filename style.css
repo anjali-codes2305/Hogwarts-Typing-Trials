@@ -1,0 +1,106 @@
+/* ═════ Core palette & reset ═════ */
+:root{
+  --bg:#0d0d0d;
+  --gold:#c59d5f;
+  --cream:#f5f3ea;
+  --err:#f87171;
+  --ok:#4ade80;
+  --track:#202020;
+  --thumb:#c59d5f;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+body{background:var(--bg);color:var(--cream);height:100vh;overflow:hidden}
+
+/* ═════ Background layers ═════ */
+#bgVideo{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-3;
+         filter:brightness(.55) saturate(1.2);pointer-events:none}
+#bgOverlay{position:fixed;inset:0;background:url("media/overlay-bg.png") center/cover no-repeat;
+           opacity:.35;z-index:-2;pointer-events:none}
+#starCanvas{position:fixed;inset:0;z-index:-1}
+
+/* ═════ Sections fade logic ═════ */
+.section{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;
+         text-align:center;gap:1.2rem;opacity:0;pointer-events:none;transition:opacity .7s}
+.section.active{opacity:1;pointer-events:auto}
+
+/* ═════ Headings ═════ */
+.hpLogo{font-family:'Cinzel',serif;color:var(--gold);text-shadow:0 0 12px rgba(197,157,95,.7)}
+.hpLogo.big{font-size:2.4rem}
+.hpLogo.small{font-size:1.7rem}
+.tagline{font-size:1.15rem;color:#ddd}
+.pulse{animation:pulse 2s infinite}
+
+/* ═════ Full-screen Door ═════ */
+#doorWrap{position:relative;width:100vw;height:100vh;overflow:hidden}
+#doorImg{width:100%;height:100%;object-fit:cover;transition:transform 1.2s ease,opacity 1.2s ease}
+.doorOpen{transform:scale(1.1);opacity:0}
+#doorBtn{position:absolute;bottom:6vh;left:50%;transform:translateX(-50%)}
+
+/* ═════ Buttons ═════ */
+.goldBtn,.ghostBtn{padding:.75rem 1.6rem;font-size:1rem;border-radius:8px;cursor:pointer;
+                   transition:transform .25s,box-shadow .25s}
+.goldBtn{background:var(--gold);color:#000;border:none}
+.ghostBtn{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.goldBtn:hover,.ghostBtn:hover{transform:scale(1.06);box-shadow:0 0 12px var(--gold)}
+
+/* ═════ Typing Game layout ═════ */
+.scrollbox{border:2px solid var(--gold);border-radius:8px;padding:1rem;height:150px;width:90%;max-width:800px;
+           overflow-y:auto;background:#111;font-family:'Cinzel',serif;font-size:1.2rem;line-height:1.8}
+.scrollbox::-webkit-scrollbar{width:8px}
+.scrollbox::-webkit-scrollbar-track{background:var(--track)}
+.scrollbox::-webkit-scrollbar-thumb{background:var(--thumb);border-radius:4px;box-shadow:0 0 6px var(--gold)}
+textarea{width:90%;max-width:800px;margin-top:1rem;padding:1rem;background:#1a1a1a;color:#fff;
+         border:2px solid var(--gold);border-radius:8px;font-size:1rem;resize:none;outline:none;
+         box-shadow:0 0 8px rgba(197,157,95,.3);transition:box-shadow .3s}
+textarea:focus{box-shadow:0 0 14px rgba(197,157,95,.65)}
+#caret{position:absolute;width:2px;height:1.3rem;background:var(--gold);animation:blink 1s step-start infinite;
+       transform:translateY(-999px)}
+.live{display:flex;gap:1.4rem;font-weight:600;margin-top:.6rem}
+.live b{color:var(--gold)}
+#progressBar{height:6px;width:0;background:linear-gradient(90deg,var(--gold),#fff6d5);
+             border-radius:3px;transition:width .3s;width:90%;max-width:800px;margin-top:1rem}
+.correct{color:var(--ok)}.wrong{color:var(--err)}
+
+/* ═════ Result Modal ═════ */
+#resultModal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;
+             justify-content:center;align-items:center;z-index:20}
+#resultsCard{background:#1a1a1a;border:3px solid var(--gold);border-radius:12px;padding:2rem 3rem;text-align:center;
+             box-shadow:0 0 20px var(--gold);animation:pop .5s}
+#resultsCard h3{font-family:'Cinzel',serif;color:var(--gold);margin-bottom:1rem}
+#resultsCard p{margin:.35rem 0;font-size:1.2rem}
+#closeModal{margin-top:1.4rem}
+.hidden{display:none!important}
+
+/* ═════ Keyframes ═════ */
+@keyframes blink{50%{opacity:0}}
+@keyframes pop  {from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--gold)}50%{box-shadow:0 0 20px var(--gold)}}
+
+@media (max-width: 480px) {
+  .hpLogo.big {
+    font-size: 1.6rem;
+  }
+
+  .hpLogo.small {
+    font-size: 1.2rem;
+  }
+
+  #doorBtn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  #resultsCard {
+    width: 90%;
+    padding: 1.2rem;
+    box-sizing: border-box;
+  }
+
+  #resultsCard p {
+    font-size: 1rem;
+  }
+
+  #bgVideo {
+    display: none; /* Hide background video on small screens */
+  }
+}

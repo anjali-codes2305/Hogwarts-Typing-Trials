@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hogwarts Typing Trials</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- 🔮 Background video (optional) -->
+  <video id="bgVideo" autoplay muted loop playsinline>
+    <source src="media/hogwarts-bg.mp4" type="video/mp4">
+  </video>
+
+  <!-- 🖼️ Overlay image -->
+  <div id="bgOverlay"></div>
+
+  <!-- ✨ Star canvas -->
+  <canvas id="starCanvas"></canvas>
+
+  <!-- ▬▬  STAGE 1 • Magical Door  ▬▬ -->
+  <section id="stageDoor" class="section active">
+    <h1 class="hpLogo big">Hogwarts&nbsp;Typing&nbsp;Trials</h1>
+
+    <div id="doorWrap">
+      <img id="doorImg" src="media/door-closed.png" alt="Magical door" />
+      <button id="doorBtn" class="goldBtn pulse">Enter</button>
+    </div>
+  </section>
+
+  <!-- ▬▬  STAGE 2 • Welcome/About  ▬▬ -->
+  <section id="stageAbout" class="section">
+    <h1 class="hpLogo small">Welcome to Hogwarts Typing Trials</h1>
+    <p class="tagline">Let’s increase your typing speed with a sprinkle of magic!</p>
+    <button id="startTypingBtn" class="goldBtn">Start Typing ✨</button>
+  </section>
+
+  <!-- ▬▬  STAGE 3 • Typing Game  ▬▬ -->
+  <section id="tester" class="section">
+    <h2 class="hpLogo small">Hogwarts Typing Trials 🪄</h2>
+
+    <div id="textDisplay" class="scrollbox"></div>
+    <div id="caret"></div>
+
+    <textarea id="inputBox" spellcheck="false" autocomplete="off"
+              placeholder="Cast your typing spell here…"></textarea>
+
+    <div id="liveStats" class="live hidden">
+      <span>⌛ <b id="liveTime">0</b>s</span>
+      <span>⚡ <b id="liveWpm">0</b> WPM</span>
+      <span>❌ <b id="liveMistakes">0</b></span>
+    </div>
+
+    <!-- restart + home buttons -->
+    <div class="btnRow">
+      <button id="restartBtn" class="goldBtn">🔄 Restart</button>
+      <button id="newTextBtn" class="ghostBtn">📝 New Text</button>
+      <button id="homeBtn"   class="ghostBtn">🏠 Home</button>
+    </div>
+
+    <div id="progressBar"></div>
+  </section>
+
+  <!-- ▬▬  RESULT MODAL  ▬▬ -->
+  <div id="resultModal" class="hidden">
+    <div id="resultsCard">
+      <h3>✨ Your Results ✨</h3>
+      <p>🧠 WPM&nbsp;&nbsp;: <span id="wpm"></span></p>
+      <p>🎯 Accuracy : <span id="accuracy"></span>%</p>
+      <p>⏳ Time&nbsp;&nbsp;: <span id="time"></span>s</p>
+      <p id="bestBadge" class="hidden">🏆 New personal best!</p>
+      <button id="closeModal" class="goldBtn">Restart 🔄</button>
+    </div>
+  </div>
+
+  <!-- 🔊 Sounds -->
+  <audio id="soundCorrect"  src="sounds/correct.mp3"  preload="auto"></audio>
+  <audio id="soundWrong"    src="sounds/wrong.mp3"    preload="auto"></audio>
+  <audio id="soundFinish"   src="sounds/finish.mp3"   preload="auto"></audio>
+  <audio id="soundType"     src="sounds/type.mp3"     preload="auto"></audio>
+  <audio id="soundAmbience" src="sounds/ambience.mp3" preload="auto" loop></audio>
+  <audio id="soundDoor"     src="sounds/door-open.mp3"preload="auto"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
